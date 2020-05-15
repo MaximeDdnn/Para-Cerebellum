@@ -36,8 +36,8 @@ create_folder(pathDataset,fileList);                                        % cr
                                                                             % source in the path dataset.
 
 for k=1:length(fileList)
-    folderName = strcat(Folder_,fileList(k).name);
-    pathFolder = fullfill(pathDataset,folderName);
+    folderName = strcat('Folder_',fileList(k).name);
+    pathFolder = fullfile(pathDataset,folderName);
     img = fullfile(pathFolder,fileList(k).name);
     cd(pathFolder)                                                          % like so, the suit functions generate
                                                                             % the outputs in the appropriate folder.
@@ -55,7 +55,7 @@ for k=1:length(fileList)
     WM = dir('*_seg2*');                                                    % White Mater mask.
     whole_cereb = dir('c_*_pcereb*');                                       % Whole cerebellum mask
     whole_cereb_box = dir('c_*');                                           % Whole cerebllum mask with bounding box
-    fprintf('step 1/4 isolation done');
+    fprintf('\n image %d step 1/4 isolation done \n',k);
      
     % step 2 : suit_normalize_dartel
     % inputs step 2                                                         % input is the structure job with field jobND. mri. 
@@ -68,7 +68,7 @@ for k=1:length(fileList)
     %outputs step 2
     TR_no_lin = dir('u_a*');                                                % non linear part of the coregistration
     TR_lin = dir('Affine_*');                                               % linear part of the registration       
-    fprintf('step 2/4 normalisation done');
+    fprintf('\n image %d step 2/4 normalisation done \n',k);
     
     % step 3 : suit_reslice_dartel
     % inputs step 3 
@@ -82,20 +82,21 @@ for k=1:length(fileList)
     % output step 3 
     mri_suit = dir('wd*');                                                  % flowfield of deformation
 
-    fprintf('step 3/4 reslice suit space done');
-    % step 4 suit_reslice_dartel
+    fprintf('\n image %d step 3/4 reslice suit space done \n',k);
+    % step 4 suit_reslice_dartel 
     job02.Affine = {TR_lin.name};
     job02.flowfield = {TR_no_lin.name};
     job02.resample = {pathAtlas};
     job02.ref = {img};
     suit_reslice_dartel_inv(job02)
 
-    fprintf('step 4/4 reslice native space done');
+    fprintf('\n image %d step 4/4 reslice native space done \n',k);
 
     cd(pathDataset)
 
 end
 end
+
 
 function [fileList] = get_file_list(pathDataset)
 fileList = dir(fullfile(pathDataset, 'r*.nii'));
@@ -109,7 +110,6 @@ function create_folder(pathDataset,fileList)
         movefile(fullfile(pathDataset,nameFile),fullfile(pathDataset,nameFolder));
     end
 end
-
 
 
 
