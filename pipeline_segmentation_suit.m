@@ -105,7 +105,8 @@ end
 function create_folder(pathDataset,fileList)
     for k=1:length(fileList)
         nameFile = fileList(k).name;
-        nameFolder = strcat('Folder_',nameFile);
+        [~,name,~] = fileparts(nameFile)                                     % remove the extension .nii for the name folder.
+        nameFolder = strcat('Folder_',name);
         mkdir(fullfile(pathDataset,nameFolder));
         movefile(fullfile(pathDataset,nameFile),fullfile(pathDataset,nameFolder));
     end
