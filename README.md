@@ -5,4 +5,4 @@ You need to run Matlab and spm before be able to run pipeline_segmentation_suit.
 
 Work in progress : Plot MRI overlayed with your own-lut segmentation mask
 
-![Alt text](/home/maxime/hpc/data/dataset_sence/data/images_recale/Folder_r01_sub-testanat_T1w/test/snap.png?raw=true "Title")
+![snap](https://user-images.githubusercontent.com/62238305/83234153-20732100-a190-11ea-9798-a35de8b0b40e.png)
