@@ -1,4 +1,4 @@
-# it's a script, the proper function is not written yet.
+
 # input : 
 # original image
 # mask segmentation you want to overlay
@@ -10,47 +10,59 @@ import nibabel as nib
 import cv2
 import pandas as pd
 
-# load path
-frame = 100
-fname_t1 = '/home/maxime/hpc/data/dataset_sence/data/images_recale/Folder_r01_sub-testanat_T1w/r01_sub-testanat_T1w.nii'
-fname_seg = '/home/maxime/hpc/data/dataset_sence/data/images_recale/Folder_r01_sub-testanat_T1w/iw_Lobules-SUIT_u_a_r01_sub-testanat_T1w_seg1.nii'
-myLut = '/home/maxime/hpc/data/dataset_sence/data/images_recale/lut_perso_suit.csv'
 
-# load data
-img = nib.load(fname_t1)
-seg = nib.load(fname_seg)
-data = img.get_data()
-dataseg = seg.get_data()
-img50 = data[frame, :, :]
-seg50 = dataseg[frame, :, :]
+def get_slices(img_path, slices, mask_path, lut_path):
+    # load
+    img = nib.load(img_path)
+    mask = nib.load(mask_path)
+    data_img = img.get_data()
+    data_mask = mask.get_data()
+    nb_slice = len(slices)
+    list_slices = [0] * nb_slice
+    idx_list_slices = 0
+    for num_slice in slices:
+        # add function that find slice we need
+        data_imgslice = data_img[num_slice, :, :]
+        data_maskslice = data_mask[num_slice, :, :]
 
-# Data are normalized because cv2 maps {0,1} to {0,255}
-# e.g any value greater than 1 is equal to 255
-img50N = (img50 - np.min(img50)) / (np.max(img50) - np.min(img50))
-img50N = np.concatenate((img50N[:, :, None], img50N[:, :, None], img50N[:, :, None]),2)
+        # Data are normalized because cv2 maps {0,1} to {0,255}
+        # e.g any value greater than 1 is equal to 255
+        data_norm_imgslice = (data_imgslice - np.min(data_imgslice)) / (np.max(data_imgslice) - np.min(data_imgslice))
+        data_norm_imgslice = np.concatenate(
+            (data_norm_imgslice[:, :, None], data_norm_imgslice[:, :, None], data_norm_imgslice[:, :, None]), 2)
 
-# build lut
-lut = pd.read_csv(myLut)
-RGB = pd.DataFrame.to_numpy(lut[['Red','Green','Blue']])
+        # build lut
+        lut = pd.read_csv(lut_path)
+        RGB = pd.DataFrame.to_numpy(lut[['Red', 'Green', 'Blue']])
 
-# apply lut
-seg50_R = np.zeros(seg50.shape)
-seg50_G = np.zeros(seg50.shape)
-seg50_B = np.zeros(seg50.shape)
+        # apply lut
+        data_maskslice_R = np.zeros(data_maskslice.shape)
+        data_maskslice_G = np.zeros(data_maskslice.shape)
+        data_maskslice_B = np.zeros(data_maskslice.shape)
 
-for label in range(1,35):
-    seg50_R[seg50 == label] = RGB[label-1, 0]
-    seg50_G[seg50 == label] = RGB[label-1, 1]
-    seg50_B[seg50 == label] = RGB[label-1, 2]
+        for label in range(1, 35):
+            data_maskslice_R[data_maskslice == label] = RGB[label - 1, 0]
+            data_maskslice_G[data_maskslice == label] = RGB[label - 1, 1]
+            data_maskslice_B[data_maskslice == label] = RGB[label - 1, 2]
 
-seg50_RGB = np.concatenate((seg50_R[:, :, None], seg50_G[:, :, None], seg50_B[:, :, None]), 2)
-seg50N = (seg50_RGB - np.min(seg50_RGB)) / (np.max(seg50_RGB) - np.min(seg50_RGB))
+        data_maskslice_RGB = np.concatenate(
+            (data_maskslice_R[:, :, None], data_maskslice_G[:, :, None], data_maskslice_B[:, :, None]), 2)
+        data_norm_maskslice_RGB = (data_maskslice_RGB - np.min(data_maskslice_RGB)) / (
+                np.max(data_maskslice_RGB) - np.min(data_maskslice_RGB))
 
-# overlay
-alpha = 0.5
-beta = 1-alpha
-dst = cv2.addWeighted(img50N, alpha, seg50N, beta, 0.0)
+        # overlay
+        alpha = 0.5
+        beta = 1 - alpha
+        img_overlay = cv2.addWeighted(data_norm_imgslice, alpha, data_norm_maskslice_RGB, beta, 0.0)
+        img_overlay = np.rot90(img_overlay)
 
-#display
-cv2.imshow("seg", dst)
-cv2.waitKey(0)
+        # stock in list_slices
+        list_slices[idx_list_slices] = img_overlay
+        idx_list_slices = idx_list_slices + 1
+
+        # display
+        cv2.imshow("seg", img_overlay)
+        cv2.waitKey(0)
+
+    return list_slices
+
