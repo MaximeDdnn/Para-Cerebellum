@@ -3,19 +3,17 @@
 import numpy as np
 import nibabel as nib
 import matplotlib.pyplot as plt
-from functions import show_slices
-from nilearn import plotting as plot
-from save_slice import get_slices
+from overlay_own_lut import get_slices
 from display import display_mosaic
 from get_bbox import get_bbox
 import math
 
-img_path = '/home/maxime/hpc/data/dataset_sence/data/images_recale/Folder_r01_sub-testanat_T1w/r01_sub-testanat_T1w.nii'
-mask_path = '/home/maxime/hpc/data/dataset_sence/data/images_recale/Folder_r01_sub-testanat_T1w/iw_Lobules-SUIT_u_a_r01_sub-testanat_T1w_seg1.nii'
-lut_path = '/home/maxime/hpc/data/dataset_sence/data/images_recale/lut_perso_suit.csv'
+img_path = '/home/maxime/hpc/data/dataset_sence/data/Folder_r01_sub-testanat_T1w/r01_sub-testanat_T1w.nii'
+mask_path = '/home/maxime/hpc/data/dataset_sence/data/Folder_r01_sub-testanat_T1w/iw_Lobules-SUIT_u_a_r01_sub-testanat_T1w_seg1.nii'
+lut_path = '/home/maxime/hpc/data/dataset_sence/data/lut_perso_suit.csv'
 
-mask=nib.load(mask_path)
-data_mask=mask.get_data()
+mask = nib.load(mask_path)
+data_mask = mask.get_data()
 plt.figure()
 plt.imshow(data_mask[100:,:,:])
 plt.show()

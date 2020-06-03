@@ -1,7 +1,4 @@
-import numpy as np
-import os
 import matplotlib.pyplot as plt
-import PIL
 
 
 def display_mosaic(list_slices, slices):
