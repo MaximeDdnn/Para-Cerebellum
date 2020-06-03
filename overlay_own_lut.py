@@ -5,18 +5,19 @@ import pandas as pd
 
 
 def get_slices(img_path, mask_path, lut_path, slices_sag, slices_cor):
-    # load
+    # load image and mask
     img = nib.load(img_path)
     mask = nib.load(mask_path)
     data_img = img.get_data()
     data_mask = mask.get_data()
+
+    # initialize
     nb_slice_sag = len(slices_sag)
     list_slices_sag = [0] * nb_slice_sag
     nb_slice_cor = len(slices_cor)
     list_slices_cor = [0] * nb_slice_cor
     idx_list_slices = 0
     for num_slice in slices_sag:
-        # add function that find slice we need
         data_imgslice = data_img[num_slice, :, :]
         data_maskslice = data_mask[num_slice, :, :]
 

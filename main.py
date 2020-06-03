@@ -8,18 +8,22 @@ from display import display_mosaic
 from get_bbox import get_bbox
 import math
 
-img_path = '/home/maxime/hpc/data/dataset_sence/data/Folder_r01_sub-testanat_T1w/r01_sub-testanat_T1w.nii'
-mask_path = '/home/maxime/hpc/data/dataset_sence/data/Folder_r01_sub-testanat_T1w/iw_Lobules-SUIT_u_a_r01_sub-testanat_T1w_seg1.nii'
-lut_path = '/home/maxime/hpc/data/dataset_sence/data/lut_perso_suit.csv'
+img_path = '/home/dieudonnem/hpc/data/dataset_sence/Folder_r01_sub-testanat_T1w/r01_sub-testanat_T1w.nii'
+mask_path = '/home/dieudonnem/hpc/data/dataset_sence/Folder_r01_sub-testanat_T1w/iw_Lobules-SUIT_u_a_r01_sub-testanat_T1w_seg1.nii'
+lut_path = 'lut_perso.csv'
 
 mask = nib.load(mask_path)
-data_mask = mask.get_data()
+data_mask = mask.get_fdata()
+test = data_mask[100, :, :]
 plt.figure()
-plt.imshow(data_mask[100:,:,:])
+plt.imshow(test)
 plt.show()
-np.rot90(data_mask,k=1,axes=(1,2))
+
+data_mask = np.rot90(data_mask,k=1,axes=(1,2))
+
+test2 = data_mask[100, :, :]
 plt.figure()
-plt.imshow(data_mask[100:,:,:])
+plt.imshow(test2)
 plt.show()
 
 
