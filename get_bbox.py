@@ -10,10 +10,10 @@ def get_bbox(mask_path):
     list_sum_cor = [0] * nb_slice_cor
     for s in range(0, nb_slice_sag):
         list_sum_sag[s] = np.sum(data_mask[s, :, :])
+    for c in range(0, nb_slice_cor):
+        list_sum_cor[c] = np.sum(data_mask[:, c, :])
     for a in range(0, nb_slice_axial):
         list_sum_axial[a] = np.sum(data_mask[:, :, a])
-    for c in range(0, nb_slice_cor):
-        list_sum_cor[c] = np.sum(data_mask[:, c, : ])
 
     # sagital
     slice_sag_right = next(x for x in list_sum_sag if x != 0)
@@ -36,4 +36,5 @@ def get_bbox(mask_path):
     slice_axial_inf = next(x for x in list_sum_axial if x != 0)
     slice_axial_inf = list_sum_axial.index(slice_axial_inf)
     ainf = nb_slice_axial - slice_axial_inf - 1
-    return sleft, sright, asup, ainf, cpost, cant
+    bbox = [sleft, sright, cpost, cant, asup, ainf]
+    return bbox

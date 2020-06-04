@@ -22,24 +22,21 @@ switcher = {
     2: gt_slice_dim2
 }
 
-
-def get_slices(img_path, mask_path, lut_path, slices_s, slices_c, slices_a):
+def get_slices(img_path, mask_path, lut_path, slices):
     # load image and mask
     img = nib.load(img_path)
     mask = nib.load(mask_path)
     data_img = img.get_data()
     data_mask = mask.get_data()
 
-
     # initialize output slices
-    nb_slice_s = len(slices_s)
+    nb_slice_s = len(slices[0])
     list_slices_s = [0] * nb_slice_s
-    nb_slice_c = len(slices_c)
+    nb_slice_c = len(slices[1])
     list_slices_c = [0] * nb_slice_c
-    nb_slice_a = len(slices_a)
+    nb_slice_a = len(slices[2])
     list_slices_a = [0] * nb_slice_a
 
-    slices = [slices_s, slices_c, slices_a]
     list_slices = [list_slices_s, list_slices_c, list_slices_a]
 
     # loop
@@ -81,9 +78,6 @@ def get_slices(img_path, mask_path, lut_path, slices_s, slices_c, slices_a):
             alpha = 0.5
             beta = 1 - alpha
             img_overlay = cv2.addWeighted(data_norm_imgslice, alpha, data_norm_maskslice_RGB, beta, 0.0)
-
-            # Crop around cerebellum
-            # img_overlay_crop = img_overlay[100:235, 45:145]
 
             # stock in list_slices
             list_sl[idx_list_slices] = img_overlay
