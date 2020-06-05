@@ -3,17 +3,11 @@ import numpy as np
 
 
 def cut_bbox(bbox, nb_cut):
-    step_s = int(math.floor(((abs(bbox[1] - bbox[0])) / nb_cut[0])))
-    step_c = int(math.floor(((abs(bbox[3] - bbox[2])) / nb_cut[1])))
-    step_a = int(math.floor(((abs(bbox[5] - bbox[4])) / nb_cut[2])))
-
-    slices_sag = np.arange(bbox[0], bbox[1], step_s)
-    slices_sag = [int(x) for x in slices_sag]
-
-    slices_cor = np.arange(bbox[2], bbox[3], step_c)
-    slices_cor = [int(y) for y in slices_cor]
-
-    slices_ax = np.arange(bbox[4], bbox[5], step_a)
-    slices_ax = [int(y) for y in slices_ax]
-    slices = [slices_sag, slices_cor, slices_ax]
+    nview = len(nb_cut)
+    step = [0]*nview
+    slices = [0]*nview
+    for view in range(nview):
+        step[view] = int(math.floor(((abs(bbox[view*2 + 1] - bbox[view*2])) / nb_cut[view])))
+        slices[view] = np.arange(bbox[2*view], bbox[2*view + 1], step[view])
+        slices[view] = [int(x) for x in slices[view]]
     return slices
