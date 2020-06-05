@@ -29,18 +29,13 @@ def get_slices(img_path, mask_path, lut_path, slices):
     data_img = img.get_data()
     data_mask = mask.get_data()
 
-    # initialize output slices
-    nb_slice_s = len(slices[0])
-    list_slices_s = [0] * nb_slice_s
-    nb_slice_c = len(slices[1])
-    list_slices_c = [0] * nb_slice_c
-    nb_slice_a = len(slices[2])
-    list_slices_a = [0] * nb_slice_a
-
-    list_slices = [list_slices_s, list_slices_c, list_slices_a]
+    nview = len(slices)
+    list_slices = [0]*nview
+    for view in range(nview):
+        list_slices[view] = [0]*len(slices[view])
 
     # loop
-    for view in [0, 1, 2]:
+    for view in range(nview):
         sl = slices[view]
         list_sl = list_slices[view]
         idx_list_slices = 0
