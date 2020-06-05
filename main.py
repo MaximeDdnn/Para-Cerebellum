@@ -19,7 +19,7 @@ str = 'getbbox done \n sright = %d, sleft = %d, cpost = %d, cant = %d, asup = %d
 print(str)
 
 # find index of slice according the number of cuts needed
-nb_cut = [1, 1, 2] # 5 slices sagital, 5 slices coronal, 2 slices axials
+nb_cut = [10, 10, 2] # 5 slices sagital, 5 slices coronal, 2 slices axials
 print(nb_cut[0],nb_cut[1],nb_cut[2])
 idx_slice = cut_bbox(bbox, nb_cut) # idx_slice = [[idx_s],[idx_c],[idx_a]]
 print('idx_slice = ', idx_slice)

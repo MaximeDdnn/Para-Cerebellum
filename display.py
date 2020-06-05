@@ -13,16 +13,15 @@ def display_mosaic(main_view, list_slices, list_idx):
     plt.figure()
     for i in range(1, nb_rows + 1):
         img = main_view[i - 1]
-        img = np.rot90(img)
         plt.subplot(nb_rows, nb_col, 1 + (i - 1) * (nb_col))
         plt.axis('off')
         plt.imshow(img)
         if i != 3:
-            for x in list_idx[i - 1]:
-                plt.axvline(x=x, color='red', )
-        else:
             for y in list_idx[i - 1]:
-                plt.axhline(y=y, color='red', )
+                plt.axhline(y=y, color='red',linewidth=0.5 )
+        else:
+            for x in list_idx[i - 1]:
+                plt.axvline(x=x, color='red',linewidth=1 )
 
     for view in [0, 1, 2]:
         for x in range(1, nb[view] + 1):
