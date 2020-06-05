@@ -84,8 +84,8 @@ def get_slices(img_path, mask_path, lut_path, slices):
             idx_list_slices = idx_list_slices + 1
 
             # display
-            cv2.imshow("sagital view", img_overlay)
-            cv2.waitKey(0)
+            #cv2.imshow("sagital view", img_overlay)
+            #cv2.waitKey(0)
         list_slices[view] = list_sl
 
     return list_slices

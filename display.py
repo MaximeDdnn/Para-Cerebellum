@@ -10,7 +10,7 @@ def display_mosaic(main_view, list_slices, list_idx):
     nb_a = len(list_slices[2])  # nb slice axial
     nb_col = max(nb_s, nb_c, nb_a) + 1
     nb = [nb_s, nb_c, nb_a]
-    plt.figure()
+    fig = plt.figure(figsize=(20,4))
     for i in range(1, nb_rows + 1):
         img = main_view[i - 1]
         plt.subplot(nb_rows, nb_col, 1 + (i - 1) * (nb_col))
@@ -31,5 +31,6 @@ def display_mosaic(main_view, list_slices, list_idx):
             # str = 'slice %d' % slices[x-1]
             # plt.title(str)
             plt.axis('off')
+            plt.subplots_adjust( wspace=0.03)
             plt.imshow(img)
     plt.show()
