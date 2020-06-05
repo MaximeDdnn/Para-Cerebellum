@@ -4,7 +4,7 @@ import nibabel as nib
 import matplotlib.pyplot as plt
 from overlay_own_lut import get_slices
 from display import display_mosaic
-from get_bbox import get_bbox
+from get_bbox import get_bbox, get_main_view
 from cut_bbox import cut_bbox
 from crop_slices import crop_slices
 
@@ -19,7 +19,7 @@ str = 'getbbox done \n sright = %d, sleft = %d, cpost = %d, cant = %d, asup = %d
 print(str)
 
 # find index of slice according the number of cuts needed
-nb_cut = [5, 5, 2] # 5 slices sagital, 5 slices coronal, 2 slices axials
+nb_cut = [10, 10, 2] # 5 slices sagital, 5 slices coronal, 2 slices axials
 print(nb_cut[0],nb_cut[1],nb_cut[2])
 idx_slice = cut_bbox(bbox, nb_cut) # idx_slice = [[idx_s],[idx_c],[idx_a]]
 print('idx_slice = ', idx_slice)
@@ -31,7 +31,8 @@ marge = 5 # marge around the crop
 list_slices = crop_slices(list_slices, bbox, marge)
 
 # display
-display_mosaic(list_slices)
+main_view = get_main_view(img_path)
+display_mosaic(main_view,list_slices)
 
 
 

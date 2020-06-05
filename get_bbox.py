@@ -38,3 +38,10 @@ def get_bbox(mask_path):
     ainf = nb_slice_axial - slice_axial_inf - 1
     bbox = [sright, sleft, cpost, cant, asup, ainf]
     return bbox
+
+
+def get_main_view(img_path):
+    img = nib.load(img_path)
+    data = img.get_fdata()
+    main_view = [data[:, 100, :], data[100, :, :],data[:, :, 100]]
+    return main_view
