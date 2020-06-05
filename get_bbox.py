@@ -43,5 +43,5 @@ def get_bbox(mask_path):
 def get_main_view(img_path):
     img = nib.load(img_path)
     data = img.get_fdata()
-    main_view = [data[:, 100, :], data[100, :, :],data[:, 100, :]]
+    main_view = [data[:, 100, :], data[110, :, :],data[:, 100, :]]
     return main_view

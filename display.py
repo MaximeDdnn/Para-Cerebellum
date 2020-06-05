@@ -22,7 +22,6 @@ def display_mosaic(main_view, list_slices, list_idx):
         else:
             for x in list_idx[i - 1]:
                 plt.axvline(x=x, color='red',linewidth=1 )
-
     for view in [0, 1, 2]:
         for x in range(1, nb[view] + 1):
             img = list_slices[view][x - 1]
