@@ -36,5 +36,5 @@ def get_bbox(mask_path):
     slice_axial_inf = next(x for x in list_sum_axial if x != 0)
     slice_axial_inf = list_sum_axial.index(slice_axial_inf)
     ainf = nb_slice_axial - slice_axial_inf - 1
-    bbox = [sleft, sright, cpost, cant, asup, ainf]
+    bbox = [sright, sleft, cpost, cant, asup, ainf]
     return bbox

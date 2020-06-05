@@ -15,23 +15,24 @@ lut_path = 'lut_perso.csv'
 
 # get 3Dbbox around cerebellum
 bbox = get_bbox(mask_path)
-str = 'getbbox done \n sleft = %d, sright = %d, cpost = %d, cant = %d, asup = %d, ainf = %d, ' %(bbox[0],bbox[1],bbox[2],bbox[3],bbox[4],bbox[5])
+str = 'getbbox done \n sright = %d, sleft = %d, cpost = %d, cant = %d, asup = %d, ainf = %d, ' %(bbox[0],bbox[1],bbox[2],bbox[3],bbox[4],bbox[5])
 print(str)
 
 # find index of slice according the number of cuts needed
-nb_cut = [10, 5, 2] # 10 slices sagital, 5 slices coronal, 2 slices axials
+nb_cut = [5, 5, 2] # 5 slices sagital, 5 slices coronal, 2 slices axials
+print(nb_cut[0],nb_cut[1],nb_cut[2])
 idx_slice = cut_bbox(bbox, nb_cut) # idx_slice = [[idx_s],[idx_c],[idx_a]]
-str = 'cut_bbox done \n slice sag = %d \n slice cor = %d, slice ax = %d' %(idx_slice[0],idx_slice[1],idx_slice[2],)
+print('idx_slice = ', idx_slice)
 # save the desired slices
 list_slices = get_slices(img_path, mask_path, lut_path, idx_slice)
 
 # zoom around the cerebellum
-#list_slices = crop_slices(list_slices, bbox)
+marge = 5 # marge around the crop
+list_slices = crop_slices(list_slices, bbox, marge)
 
 # display
-display_mosaic(list_slices[0])
-display_mosaic(list_slices[1])
-display_mosaic(list_slices[2])
+display_mosaic(list_slices)
+
 
 
 
