@@ -1,0 +1,20 @@
+name,name_recale,contrast,sequence,resolution,mouvement,mouvement correction,noise,regularisation factor
+T1w,r01_sub-testanat_T1w.nii,T1,MPRAGE,1,non,non,X,X
+acq-MEMPRAGE_T1w,r02_sub-testanat_acq-MEMPRAGE_T1w.nii,T1,MEMPRAGE,1,non,oui,X,X
+acq-0.8mm_T1w,r03_sub-testanat2_acq-0p8mm_T1w.nii,T1,MPRAGE,"0,8",non,non,X,X
+acq-MEMPRAGEnomotion_T1w,r04_sub-testanat2_acq-MEMPRAGEnomotion_T1w.nii,T1,MEMPRAGE,"0,8",non,oui,X,X
+acq-1mm_rec-uniden8000_T1w,r05_sub-testanat2_acq-MEMPRAGEmotion_T1w.nii,T1,MEMPRAGE,"0,8",oui,X,X,X
+acq-1mm_rec-mp2rage_T1w,r06_sub-testanat_acq-1mm_rec-uniden8000_T1w.nii,T1,MP2RAGE,1,non,X,non,8000
+acq-0p8mm_rec-uniden4000_T1w,r07_sub-testanat_acq-1mm_rec-mp2rage_T1w.nii,T1,MP2RAGE,1,non,X,oui,X
+acq-0p8mm_rec-uniden8000_T1w,r08_sub-testanat2_acq-0p8mm_rec-uniden4000_T1w.nii,T1,MP2RAGE,"0,8",non,X,non,4000
+acq-0p8mm_rec-mp2rage_T1w,r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w.nii,T1,MP2RAGE,"0,8",non,X,non,8000
+acq-0p8mmmov_rec-uniden4000_T1w,r10_sub-testanat2_acq-0p8mm_rec-mp2rage_T1w.nii,T1,MP2RAGE,"0,8",non,X,oui,X
+acq-0p8mmmov_rec-uniden8000_T1w,,T1,MP2RAGE,"0,8",oui,X,non,4000
+acq-0p8mmmov_rec-mp2rage_T1w,,T1,MP2RAGE,"0,8",oui,X,non,8000
+acq-vNav_T2w (dossier sub-testanat),,T1,MP2RAGE,"0,8",oui,X,oui,X
+T2w-1,r14_sub-testanat_acq-vNav_T2w.nii,T2,SPACE,1,X,X,oui,X
+acq-vNav_T2w-2,r15_sub-testanat_T2w.nii,T2,SPACE,1,X,X,non,X
+T2w-2,r16_sub-testanat2_acq-vNav_T2w.nii,T2,SPACE,"0,8",X,X,oui,X
+acq-1mm_rec-mp2rage_T1map,r17_sub-testanat2_T2w.nii,T2,SPACE,"0,8",X,X,non,X
+acq-0p8mm_rec-mp2rage_T1map,r18_sub-testanat_acq-1mm_rec-mp2rage_T1map.nii,T1map,MP2RAGE,1,non,X,oui,X
+acq-0p8mmmov_rec-mp2rage_T1map,r19_sub-testanat2_acq-0p8mm_T1map.nii,T1map,MP2RAGE,"0,8",non,X,oui,X

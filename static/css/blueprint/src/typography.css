@@ -121,37 +121,3 @@ caption     { background: #eee; }
 .last      { margin-right:0; padding-right:0; }
 .top       { margin-top:0; padding-top:0; }
 .bottom    { margin-bottom:0; padding-bottom:0; }
-
-/* img
--------------------------------------------------------------- */
-img {
-  width: 600px;
-  height: 600px;
-  border: 1px solid #000;
-}
-
-.narrow {
-  width: 100px;
-  height: 150px;
-  margin-top: 10px;
-}
-
-.fill {
-  object-fit: fill;
-}
-
-.contain {
-  object-fit: contain;
-}
-
-.cover {
-  object-fit: cover;
-}
-
-.none {
-  object-fit: none;
-}
-
-.scale-down {
-  object-fit: scale-down;
-}

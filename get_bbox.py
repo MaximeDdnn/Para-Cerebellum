@@ -1,5 +1,7 @@
 import nibabel as nib
 import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 def get_bbox(mask_path):
     mask = nib.load(mask_path)
@@ -45,3 +47,16 @@ def get_main_view(img_path):
     data = img.get_fdata()
     main_view = [data[:, 100, :], data[110, :, :],data[:, 100, :]]
     return main_view
+
+
+def get_quick_visual(img_path, save_path):
+    img = nib.load(img_path)
+    data = img.get_fdata()
+    main_view = [data[100, :, :], data[:, 100, :],data[:, :, 100]]
+    main_view = [np.rot90(view) for view in main_view]
+    plt.figure(figsize = (5,1.5))
+    for i in range(1,4):
+        plt.subplot(1, 3, i)
+        plt.axis('off')
+        plt.imshow(main_view[i-1])
+    plt.savefig(save_path)
