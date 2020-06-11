@@ -70,7 +70,7 @@ def get_slices(img_path, mask_path, lut_path, slices):
                     np.max(data_maskslice_RGB) - np.min(data_maskslice_RGB))
 
             # overlay
-            alpha = 0.5
+            alpha = 0.6
             beta = 1 - alpha
             img_overlay = cv2.addWeighted(data_norm_imgslice, alpha, data_norm_maskslice_RGB, beta, 0.0)
 

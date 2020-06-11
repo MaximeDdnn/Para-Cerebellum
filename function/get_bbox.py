@@ -1,7 +1,7 @@
 import nibabel as nib
 import numpy as np
 import matplotlib.pyplot as plt
-import os
+
 
 def get_bbox(mask_path):
     mask = nib.load(mask_path)

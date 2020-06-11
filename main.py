@@ -1,24 +1,62 @@
 #!/usr/bin/env python3
 import os
 import pandas as pd
-from pipeline import pipeline
+from function.pipeline import pipeline
 
 
 def main():
-    # initialisation input
-    dir_path = '/home/dieudonnem/hpc/data/dataset_sence/'
-    img_folder = 'Folder_r01_sub-testanat_T1w'
-    img_name = 'r01_sub-testanat_T1w.nii'
-    img_path = os.path.join(dir_path, img_folder, img_name)
-    mask_name = 'iw_Lobules-SUIT_u_a_r01_sub-testanat_T1w_seg1.nii'
-    mask_path = os.path.join(dir_path, img_folder, mask_name)
-    lut_path = 'lut_perso.csv'
-    info_dataset = pd.read_csv('recap_dataset_sence.csv')
-    #initialisation output
-    save_path = '/home/dieudonnem/hpc/out/suit/dataset_sence/'
+    """
+    This main function save all the slices you specified of your MRI to make the evaluation of you processing easier.
+    The slices are saved in png format in your output directory.
+    First This main function create the empty output folders in your output directory.
+    And then this main funtion run the pipeline function for store specified slice, overlay segmentation mask of Suit
+    crop aroud the cerebellum.
+    input : input_dir ___ Folder_img1 ___ img1.nii
+                    |                |___ mask1.nii
+                    |                |___ ...all proccessing Suit outputs
+                    | ___ Folder_img2 ___img2.nii
+                    |                |___mask2.nii
+                    |                |___ ...all processing Suit outputs
+                    |___Folder_imgN ...
 
-    # pipeline
-    pipeline(img_path, img_name, mask_path, lut_path, info_dataset, save_path)
+    how to specify the index of slices you want to save : idx_slices = [[idx_sagittal_slices],[idx_coronal_slices],[idx_axial_slices]]
+    your can specify only sagitall slices and coronal slices if you want not saved axial slices like [[idx_sagittal_slices],[idx_coronal_slices]]
+    output with for exemple idx_slices = [[10,12,14],[50,100],[89]]
+    output : out_dir ___ Folder_img1 ___ sagittal ___slice10.png
+                    |                  |            |___slice12.png
+                    |                  |            |___slice14.png
+                    |                  |___ coronal ___slice50.png
+                    |                  |           |___slice100.png
+                    |                  |___ axial ___slice89.png
+                    |                  |___ view ___sagittal.png
+                    |                           |___coronal.png
+                    |                           |___axial.png
+                    | ___ Folder_imgN ___ ...
+
+    the ouptput "/view" is an image of the cerebellum with line added on it that show the selected slices
+    """
+
+    # initialisation of the inputs
+    dir_path = '/home/dieudonnem/hpc/data/dataset_sence/'
+    folder_list = [x for x in os.listdir(dir_path)]
+    folder_list.sort()
+    lut_path = 'doc/lut_perso.csv'
+    info_dataset = pd.read_csv('doc/recap_dataset_sence.csv')
+
+    # initialisation output
+    out_dir = '/home/dieudonnem/hpc/out/suit/dataset_sence'
+
+    # idx_slice is set to compare some slices with the figures available in the Schmahmann1999 paper.
+    # "Three-dimensional MRI Atlas of the Human Cerebellum in Proportional Stereotaxic Space" DOI: 10.1006/nimg.1999.0459
+    # Schmaahman paper Sagittal images progressing laterally by increment of 10 mm
+    # Schmaahman paper Coronal fig 20-25 : images comencint at y=-38 and progressing caudally to y= -88
+    idx_slice = [[50, 60, 70, 80, 90, 100],[70, 80, 90, 100, 110, 120]]
+
+    for folder in folder_list:
+        os.mkdir(os.path.join(out_dir, folder))
+
+    for folder in folder_list:
+        pipeline(dir_path, folder, lut_path, info_dataset, idx_slice, out_dir)
 
 
 if __name__ == "__main__":
