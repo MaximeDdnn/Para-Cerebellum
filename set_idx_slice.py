@@ -29,9 +29,6 @@ idx_slice[0] = [50, 60, 70, 80, 90, 100]
 idx_slice[1] = [70, 80, 90, 100, 110, 120]
 
 
-
-
-
 # get the desired slices
 list_slices = get_slices(img_path, mask_path, lut_path, idx_slice)
 
