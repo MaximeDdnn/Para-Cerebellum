@@ -37,7 +37,7 @@ def pipeline(input_dir, folder, lut_path, idx_slice, out_dir):
     print(str)
 
     # save the desired slices
-    list_slices = get_slices(img_path, mask_path, lut_path, idx_slice)
+    list_slices = get_slices(img_path, mask_path, lut_path, idx_slice, lut_flag=True)
 
     # zoom around the cerebellum
     marge = 5  # marge around the crop
