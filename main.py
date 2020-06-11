@@ -64,7 +64,8 @@ def main():
     idx_slice = [[50, 60, 70, 80, 90, 100],[70, 80, 90, 100, 110, 120]]
 
     for folder in input_folders:
-        os.mkdir(os.path.join(out_dir, folder))
+        if not os.path.exists(os.path.join(out_dir, folder)):
+            os.mkdir(os.path.join(out_dir, folder))
 
     for folder in input_folders:
         pipeline(input_dir, folder, lut_path, idx_slice, out_dir)
