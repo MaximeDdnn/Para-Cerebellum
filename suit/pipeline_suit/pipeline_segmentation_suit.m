@@ -29,22 +29,28 @@
 % iw_* : segmentation according the atlas
 
 
-function segmentation_suit(pathDataset, pathAtlas)
+function pipeline_segmentation_suit(pathDataset, pathAtlas)
 
 fileList = get_file_list(pathDataset);
-create_folder(pathDataset,fileList);                                        % create a folder with the image 
-                                                                            % source in the path dataset.
-
-for k=1:length(fileList)
-    folderName = strcat('Folder_',fileList(k).name);
+%create_folder(pathDataset,fileList);                                        % create a folder with the image 
+fprintf('%d',length(fileList));     
+                                                                             % source in the path dataset.
+%for k=1:length(fileList)
+for k=1
+    
+    %folderName = strcat('Folder_',fileList(k).name);
+    folderName = 'Folder_r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w';
     pathFolder = fullfile(pathDataset,folderName);
-    img = fullfile(pathFolder,fileList(k).name);
-    cd(pathFolder)                                                          % like so, the suit functions generate
+    %imgT1 = fullfile(pathFolder,fileList(k).name);
+    imgT1 = '/home/dieudonnem/hpc/data/dataset_sence/T1T2/Folder_r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w/r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w.nii';
+    imgT2 = '/home/dieudonnem/hpc/data/dataset_sence/Folder_r16_sub-testanat2_acq-vNav_T2w/r16_sub-testanat2_acq-vNav_T2w.nii';
+    %cd(pathFolder)  
+    cd('/home/dieudonnem/hpc/data/dataset_sence/T1T2/Folder_r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w')% like so, the suit functions generate
                                                                             % the outputs in the appropriate folder.
   
     % step 1 : suit_isolate_seg 
     % inputs step 1                                                         % input is a struct Source with fields
-    Source.source = {{img}};                                                % if muliple inputs to impove isolation, 
+    Source.source = {{imgT1},{imgT2}};                                                % if muliple inputs to impove isolation, 
                                                                             % do {{img1},{img2}}.(T1W and T2W of same subject for exemple)
     Source.maskp = 0.2;                                                     % défaut=0.2 see suit_get_defaults() in the suit project.
     Source.bb = [-76,76; -108,-6;-70,11];                                   % défaut=[-76,76; -108,-6;-70,11]
@@ -74,7 +80,7 @@ for k=1:length(fileList)
     % inputs step 3 
     mri.affineTr = {TR_lin.name};
     mri.flowfield = {TR_no_lin.name};
-    mri.resample = {img};
+    mri.resample = {imgT1};
     mri.mask =  {whole_cereb.name};
     job.subj = mri;                                                         
     
@@ -87,7 +93,7 @@ for k=1:length(fileList)
     job02.Affine = {TR_lin.name};
     job02.flowfield = {TR_no_lin.name};
     job02.resample = {pathAtlas};
-    job02.ref = {img};
+    job02.ref = {imgT1};
     suit_reslice_dartel_inv(job02)
 
     fprintf('\n image %d step 4/4 reslice native space done \n',k);
@@ -105,7 +111,7 @@ end
 function create_folder(pathDataset,fileList)
     for k=1:length(fileList)
         nameFile = fileList(k).name;
-        [~,name,~] = fileparts(nameFile)                                     % remove the extension .nii for the name folder.
+        [~,name,~] = fileparts(nameFile);                                     % remove the extension .nii for the name folder.
         nameFolder = strcat('Folder_',name);
         mkdir(fullfile(pathDataset,nameFolder));
         movefile(fullfile(pathDataset,nameFile),fullfile(pathDataset,nameFolder));

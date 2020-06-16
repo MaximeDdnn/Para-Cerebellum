@@ -1,8 +1,8 @@
 import os
-from function.overlay_own_lut import get_slices
-from function.display import save_slice_visual, save_slice
-from function.get_bbox import get_bbox, get_main_view
-from function.crop_slices import crop_slices
+from suit.function.overlay_own_lut import get_slices
+from suit.function.display import save_slice_visual, save_slice
+from suit.function.get_bbox import get_bbox, get_main_view
+from suit.function.crop_slices import crop_slices
 
 
 def pipeline(input_dir, folder, lut_path, idx_slice, out_dir):

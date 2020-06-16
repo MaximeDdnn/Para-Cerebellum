@@ -1,8 +1,8 @@
-from function.display import display_mosaic
-from function.overlay_own_lut import get_slices
-from function.get_bbox import get_bbox, get_main_view
-from function.cut_bbox import cut_bbox
-from function.crop_slices import crop_slices
+from suit.function.display import display_mosaic
+from suit.function.overlay_own_lut import get_slices
+from suit.function.get_bbox import get_bbox, get_main_view
+from suit.function.cut_bbox import cut_bbox
+from suit.function.crop_slices import crop_slices
 
 
 dir_path = '/home/dieudonnem/hpc/data/dataset_sence/'
