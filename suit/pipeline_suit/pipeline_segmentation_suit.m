@@ -29,28 +29,26 @@
 % iw_* : segmentation according the atlas
 
 
-function pipeline_segmentation_suit(pathDataset, pathAtlas)
+function pipeline_segmentation_suit(input_folder, pathAtlas)
 
-fileList = get_file_list(pathDataset);
+fileList = get_file_list(input_folder);
 %create_folder(pathDataset,fileList);                                        % create a folder with the image 
 fprintf('%d',length(fileList));     
                                                                              % source in the path dataset.
 %for k=1:length(fileList)
 for k=1
-    
-    %folderName = strcat('Folder_',fileList(k).name);
-    folderName = 'Folder_r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w';
-    pathFolder = fullfile(pathDataset,folderName);
+    nameFile = fileList(k).name;
+    [~,name,~] = fileparts(nameFile); 
+    folderName = strcat('Folder_',name);
+    pathFolder = fullfile(input_folder,folderName);
     %imgT1 = fullfile(pathFolder,fileList(k).name);
-    imgT1 = '/home/dieudonnem/hpc/data/dataset_sence/T1T2/Folder_r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w/r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w.nii';
-    imgT2 = '/home/dieudonnem/hpc/data/dataset_sence/Folder_r16_sub-testanat2_acq-vNav_T2w/r16_sub-testanat2_acq-vNav_T2w.nii';
-    %cd(pathFolder)  
-    cd('/home/dieudonnem/hpc/data/dataset_sence/T1T2/Folder_r09_sub-testanat2_acq-0p8mm_rec-uniden8000_T1w')% like so, the suit functions generate
-                                                                            % the outputs in the appropriate folder.
-  
+    imgT1 = '/home/dieudonnem/hpc/data/inter/sub-10_T1w.nii';
+    imgT2 = '/home/dieudonnem/hpc/data/inter/sub-10_T2w.nii';
+    cd(pathFolder)  
+                                                                           
     % step 1 : suit_isolate_seg 
     % inputs step 1                                                         % input is a struct Source with fields
-    Source.source = {{imgT1},{imgT2}};                                                % if muliple inputs to impove isolation, 
+    Source.source = {{imgT1,imgT2}};                                                % if muliple inputs to impove isolation, 
                                                                             % do {{img1},{img2}}.(T1W and T2W of same subject for exemple)
     Source.maskp = 0.2;                                                     % défaut=0.2 see suit_get_defaults() in the suit project.
     Source.bb = [-76,76; -108,-6;-70,11];                                   % défaut=[-76,76; -108,-6;-70,11]
@@ -98,14 +96,14 @@ for k=1
 
     fprintf('\n image %d step 4/4 reslice native space done \n',k);
 
-    cd(pathDataset)
+    cd(input_folder)
 
 end
 end
 
 
 function [fileList] = get_file_list(pathDataset)
-fileList = dir(fullfile(pathDataset, 'r*.nii'));
+fileList = dir(fullfile(pathDataset, '*.nii'));
 end
 
 function create_folder(pathDataset,fileList)

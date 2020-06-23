@@ -23,4 +23,5 @@ git submodule update --init --recursive
 ./autogen.sh
 ./configure --with-build-path=/opt/minc/1.9.17/
 make
-sudo make install
+sudo make install.
+
