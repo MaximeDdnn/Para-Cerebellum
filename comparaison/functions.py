@@ -3,7 +3,7 @@ import numpy as np
 import os
 from scipy.ndimage import sobel, generic_gradient_magnitude
 
-
+nb_label = 29
 out_dir = '/home/dieudonnem/hpc/out'
 
 soft = ['suit', 'suiter']
@@ -16,9 +16,13 @@ img_suit = os.path.join(out_dir, soft[0], dataset, sub, folder[0], 'iw_Lobules-S
 # suit
 img_suiter = os.path.join(out_dir, soft[1], dataset, sub, folder[1], 'ro_wCBS_SUIT.nii')
 
+# CNN
+nb_label = 29
+label = np.arange(nb_label)
 save_dir = '/home/dieudonnem/hpc/out/comparaison'
+img =
+
 img = [img_suit, img_suiter]
-label = np.arange(35)
 
 def draw_fissure(img,label):
     # init seg, data, edge
@@ -26,6 +30,7 @@ def draw_fissure(img,label):
     seg = [0]*len(img)
     data = [0]*len(img)
 
+for
     for i in range(len(img)):
         seg[i] = nib.load(img[i])
         data[i] = seg[i].get_fdata()
