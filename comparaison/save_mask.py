@@ -39,7 +39,4 @@ for soft in ['suiter']:
     input_dir = os.path.join('/home/dieudonnem/hpc/out/', soft, 'dataset_sence/sub-1/out_soft')
     save_mask(input_dir, soft)
 
-def dice(img1, img2):
-    coef = (2 * (np.logical_and(img1,img2)) / np.logical_or(img1,img2))
-    return coef
 
