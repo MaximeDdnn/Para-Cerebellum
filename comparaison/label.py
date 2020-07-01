@@ -108,4 +108,31 @@ label_suiter = {
     34: 'R_Fastigial'
 }
 
-
+label_suiter_cnn = {
+    'BG': [['BG'], ['BG']],
+    'R_I-IV': [['R_I-IV'], ['R_I-III', 'R_IV']],
+    'L_I-IV': [['L_I-IV'], ['L_I-III', 'L_IV']],
+    'R_V': [['R_V'], ['R_V']],
+    'L_V': [['L_V'], ['L_V']],
+    'R_VI': [['R_VI'], ['R_VI']],
+    'V_VI': [['V_VI'], ['V_VI']],
+    'L_VI': [['L_VI'], ['L_VI']],
+    'V_VII': [['V_CrusI', 'V_CrusII', 'V_VIIb'], ['V_VII']],
+    'R_CrusI': [['R_CrusI'], ['R_CRI']],
+    'R_CrusII': [['R_CrusII'], ['R_CRII']],
+    'R_VIIB': [['R_VIIb'], ['R_VIIB']],
+    'L_CrusI': [['L_CrusI'], ['L_CRI']],
+    'L_CrusII': [['L_CrusII'], ['L_CRII']],
+    'L_VIIB': [['L_VIIb'], ['L_VIIB']],
+    'V_VIII': [['V_VIIIa', 'V_VIIIb'], ['V_VIII']],
+    'R_VIIIA': [['R_VIIIa'], ['R_VIIIA']],
+    'R_VIIIB': [['R_VIIIb'], ['R_VIIIB']],
+    'L_VIIIA': [['L_VIIIa'], ['L_VIIIA']],
+    'L_VIIIB': [['L_VIIIb'], ['L_VIIIB']],
+    'V_IX': [['V_IX'], ['V_IX']],
+    'R_IX': [['R_IX'], ['R_IX']],
+    'L_IX': [['L_IX'], ['L_IX']],
+    'V_X': [['V_X'], ['V_X']],
+    'R_X': [['R_X'], ['R_X']],
+    'L_X': [['L_X'], ['L_X']]
+}
