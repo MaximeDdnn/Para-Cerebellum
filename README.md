@@ -21,21 +21,21 @@ visual: The subfolder "visual" is an additional subfolder that contains addition
 
 Here is a recap of the output organisation 
 
-suiter
-      dataset
-            sub-i
-                  original
-                        T1w.nii
-                  derivative
-                        mask
-                        self
-                              T1w
-                                    label.nii
-                        vscnn
-                        vsceres
-                  edge
-                        self
-                              T1w
+* suiter
+      * dataset
+            * sub-i
+                  * original
+                        * T1w.nii
+                  * derivative
+                        * mask
+                        * self
+                              * T1w
+                                    * label.nii
+                        * vscnn
+                        * vsceres
+                  * edge
+                        * self
+                              * T1w
                                     edge.nii
                         vscnn
                         vsceres
