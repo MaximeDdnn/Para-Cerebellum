@@ -27,28 +27,28 @@ Here is a recap of the output organisation
             * original
                 * T1w.nii
             * derivative
-                        * mask
-                        * self
-                              * T1w
-                                    * label.nii
-                        * vscnn
-                        * vsceres
-                  * edge
-                        * self
-                              * T1w
-                                    * edge.nii
-                        * vscnn
-                        * vsceres
-                  * dice
-                        * vscnn
-                              * dice_matrix
-                                    * dice_matrix.npy
-                                    * dice_matrix_R.npy
-                                    * dice_matrix_L.npy
-                                    * rec
-                              * dicevsrec.fig
-                        * vsceres
-                        * visual       
+                * mask
+                    * self
+                        * T1w
+                            * label.nii
+                    * vscnn
+                    * vsceres
+                * edge
+                    * self
+                        * T1w
+                            * edge.nii
+                    * vscnn
+                    * vsceres
+                * dice
+                    * vscnn
+                        * dice_matrix
+                            * dice_matrix.npy
+                            * dice_matrix_R.npy
+                            * dice_matrix_L.npy
+                        * rec
+                            * dicevsrec.fig
+                    * vscerer
+                * visual       
 * suit
 * cnn
 * ceres
