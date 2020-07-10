@@ -36,22 +36,22 @@ Here is a recap of the output organisation
                   * edge
                         * self
                               * T1w
-                                    edge.nii
-                        vscnn
-                        vsceres
-                  dice
-                        vscnn
-                              dice_matrix
-                                    dice_matrix.npy
-                                    dice_matrix_R.npy
-                                    dice_matrix_L.npy
-                                    rec
-                              dicevsrec.fig
-                        vsceres
-                        visual       
-suit
-cnn
-ceres
+                                    * edge.nii
+                        * vscnn
+                        * vsceres
+                  * dice
+                        * vscnn
+                              * dice_matrix
+                                    * dice_matrix.npy
+                                    * dice_matrix_R.npy
+                                    * dice_matrix_L.npy
+                                    * rec
+                              * dicevsrec.fig
+                        * vsceres
+                        * visual       
+* suit
+* cnn
+* ceres
 
 
 main_pipeline_segmentation_suit show you an exemple to run the function pipeline_segmentation_suit.
