@@ -30,23 +30,23 @@ Here is a recap of the output organisation
                 * mask
                     * self
                         * T1w
-                            label.nii
+                            - label.nii
                     * vscnn
                     * vsceres
                 * edge
                     * self
                         * T1w
-                            edge.nii
+                            - edge.nii
                     * vscnn
                     * vsceres
                 * dice
                     * vscnn
                         * dice_matrix
-                            dice_matrix.npy
-                            dice_matrix_R.npy
-                            dice_matrix_L.npy
+                            - dice_matrix.npy
+                            - dice_matrix_R.npy
+                            - dice_matrix_L.npy
                         * rec
-                            dicevsrec.fig
+                            - dicevsrec.fig
                     * vscerer
                 * visual       
 * suit
