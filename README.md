@@ -2,9 +2,13 @@
 
 ## Introduction to the tested cerebellum segmentation softs
 ### suit
+website : http://www.diedrichsenlab.org/imaging/suit.htm
 ### suiter
+website : https://figshare.com/articles/S1_Data_Validation_brainstem_masks_and_Application_datasets_SUIT_and_SUITer_scripts_/7886243/1
 ### cnn
+website : http://iacl.ece.jhu.edu/index.php?title=Cerebellum_CNN
 ### ceres
+webiste : https://www.volbrain.upv.es/instructions.php
 
 ## Run segmentation processes and stored results.
 ### suit
