@@ -1,6 +1,7 @@
 """
 here are the labels used by the different software i evaluate writen as dictionary.
 """
+# original label
 label_cnn = {
     0: 'BG',
     12: 'CM',
@@ -108,6 +109,7 @@ label_suiter = {
     34: 'L_Fastigial'
 }
 
+# merge label
 label_suiter_cnn = {
     'BG': [['BG'], ['BG']],
     'R_I-IV': [['R_I-IV'], ['R_I-III', 'R_IV']],
@@ -135,4 +137,12 @@ label_suiter_cnn = {
     'V_X': [['V_X'], ['V_X']],
     'R_X': [['R_X'], ['R_X']],
     'L_X': [['L_X'], ['L_X']]
+}
+
+# The soft_select dict allows to find the output of interest in each "original" subfolder of each soft
+# and to select the corresponding dict of label.
+soft_select = {
+    'cnn': [label_cnn, 'r'],
+    'suit': [label_suit, 'iw'],
+    'suiter': [label_suiter, 'rs']
 }

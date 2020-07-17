@@ -2,7 +2,7 @@ import numpy as np
 import nibabel as nib
 import os
 import matplotlib.pyplot as plt
-from comparaison.label import label_suit, label_suiter, label_cnn, label_suiter_cnn
+from derivative.labels import label_suit, label_suiter, label_cnn, label_suiter_cnn
 from scipy.ndimage import sobel, generic_gradient_magnitude
 
 def get_dice(img1, img2):
@@ -32,8 +32,8 @@ def minimize_label(input_dir, softs,  edge_flag=True):
                 data_suiter = [x.get_fdata() for x in mask_suiter]
                 new_mask_suiter = sum(data_suiter)
                 new_mask_suiter = nib.Nifti1Image(new_mask_suiter, mask_suiter[0].affine, mask_suiter[0].header)
-                os.makedirs(os.path.join('/home/dieudonnem/hpc/out/comparaison/',softs[0] + '_' + softs[1], 'dataset_sence', 'sub-1', 'mask', softs[0], img), exist_ok=True)
-                nib.save(new_mask_suiter, os.path.join('/home/dieudonnem/hpc/out/comparaison/', softs[0] + '_' + softs[1], 'dataset_sence', 'sub-1', 'mask', softs[0], img, label + '.nii'))
+                os.makedirs(os.path.join('/home/dieudonnem/hpc/out/derivative/',softs[0] + '_' + softs[1], 'dataset_sence', 'sub-1', 'mask', softs[0], img), exist_ok=True)
+                nib.save(new_mask_suiter, os.path.join('/home/dieudonnem/hpc/out/derivative/', softs[0] + '_' + softs[1], 'dataset_sence', 'sub-1', 'mask', softs[0], img, label + '.nii'))
                 print(img, '>>', softs[0], '>>', label, 'common mask saved')
                 lab_cnn = label_suiter_cnn.get(label)[1]
                 path_cnn = [os.path.join(out_path, softs[1], dataset, sub_id, 'derivative', 'mask', img, x + '.nii') for x in lab_cnn]
@@ -41,13 +41,13 @@ def minimize_label(input_dir, softs,  edge_flag=True):
                 data_cnn = [x.get_fdata() for x in mask_cnn]
                 new_mask_cnn = sum(data_cnn)
                 new_mask_cnn = nib.Nifti1Image(new_mask_cnn, mask_cnn[0].affine, mask_cnn[0].header)
-                os.makedirs(os.path.join('/home/dieudonnem/hpc/out/comparaison/', softs[0] + '_' + softs[1],'dataset_sence/sub-1/mask/cnn', img), exist_ok=True)
-                nib.save(new_mask_cnn, os.path.join('/home/dieudonnem/hpc/out/comparaison', softs[0] + '_' + softs[1], 'dataset_sence/sub-1/mask/',softs[1],img, label + '.nii'))
+                os.makedirs(os.path.join('/home/dieudonnem/hpc/out/derivative/', softs[0] + '_' + softs[1],'dataset_sence/sub-1/mask/cnn', img), exist_ok=True)
+                nib.save(new_mask_cnn, os.path.join('/home/dieudonnem/hpc/out/derivative', softs[0] + '_' + softs[1], 'dataset_sence/sub-1/mask/',softs[1],img, label + '.nii'))
                 print(img, '>>', softs[1], '>>', label, 'common mask saved')
 
 
 
-def save_dice_matrix(list_img, soft1, soft2, soft1_mask_path, soft2_mask_path, dict_label):
+def dice_matrix(list_img, soft1, soft2, soft1_mask_path, soft2_mask_path, dict_label):
     """
     :param list_img:
     :param soft1: you must choose between string 'cnn' or 'suit' or 'suiter
@@ -77,7 +77,7 @@ def save_dice_matrix(list_img, soft1, soft2, soft1_mask_path, soft2_mask_path, d
                 data_2 = mri_2.get_fdata()
                 # fill dice_matrix
                 dice_matrix[list_label.index(label_1)][list_label.index(label_2)] = get_dice(data_1, data_2)
-        save_dir = os.path.join(out_path, 'comparaison', soft1 + '_' + soft2, dataset, sub_id, 'dice_matrix', img)
+        save_dir = os.path.join(out_path, 'derivative', soft1 + '_' + soft2, dataset, sub_id, 'dice_matrix', img)
         os.makedirs(save_dir, exist_ok=True)
         np.save(os.path.join(save_dir, 'dice_matrix'), dice_matrix)
         print('\t dice_matrix for %s save \n' %img )
@@ -99,7 +99,7 @@ def split_dice_matrix(dice_matrix, label):
     return dice_matrix_L, dice_matrix_R
 
 def displayRL(soft1, soft2, list_label_name_L,list_label_name_R):
-    input_dir = os.path.join('/home/dieudonnem/hpc/out/comparaison', soft1 + '_' + soft2, 'dataset_sence/sub-1/dice_matrix')
+    input_dir = os.path.join('/home/dieudonnem/hpc/out/derivative', soft1 + '_' + soft2, 'dataset_sence/sub-1/dice_matrix')
     subfolders = os.listdir(input_dir)
     subfolders.sort()
     for folder in subfolders:
@@ -136,7 +136,7 @@ def displayRL(soft1, soft2, list_label_name_L,list_label_name_R):
 
 
 def display(soft1, soft2, list_label_name_soft1,list_label_name_soft2):
-    input_dir = os.path.join('/home/dieudonnem/hpc/out/comparaison', soft1 + '_' + soft2, 'dataset_sence/sub-1/dice_matrix')
+    input_dir = os.path.join('/home/dieudonnem/hpc/out/derivative', soft1 + '_' + soft2, 'dataset_sence/sub-1/dice_matrix')
     subfolders = os.listdir(input_dir)
     subfolders.sort()
     for folder in subfolders:
@@ -163,7 +163,7 @@ def exl(label_R):
     create an excel sheet that sum up dice score for each area ( column ) and each type of record ( row )
     :return:
     """
-    input_path = os.path.join('/home/dieudonnem/hpc/out/comparaison', 'suit_cnn', 'dataset_sence/sub-1/dice_matrix')
+    input_path = os.path.join('/home/dieudonnem/hpc/out/derivative', 'suit_cnn', 'dataset_sence/sub-1/dice_matrix')
     list_folder = os.listdir(input_path)
     list_dice_matrix = [np.load(os.path.join(input_path, folder, 'dice_matrix_R.npy')) for folder in list_folder]
     dice_rec = np.array([np.diag(x) for x in list_dice_matrix])
@@ -231,7 +231,7 @@ list_label_name_cnn = ["cnn " + x for x in list_label_name]
 
 
 
-# input_path = '/home/dieudonnem/hpc/out/comparaison/suit_cnn/dataset_sence/sub-1/dice_matrix'
+# input_path = '/home/dieudonnem/hpc/out/derivative/suit_cnn/dataset_sence/sub-1/dice_matrix'
 # list_folder = os.listdir(input_path)
 # list_folder.sort()
 # for folder in list_folder:

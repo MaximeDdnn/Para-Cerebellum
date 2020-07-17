@@ -29,5 +29,5 @@ def save_edge(list_img):
             nib.save(new_img, os.path.join(save_dir, folder_out, name))
 
 
-save_edge(list_img)
+
 

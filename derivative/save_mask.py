@@ -2,11 +2,13 @@ import nibabel as nib
 import numpy as np
 import os
 from scipy.ndimage import sobel, generic_gradient_magnitude
-from comparaison.label import label_cnn, label_suit, label_suiter
+from derivative.labels import label_cnn, label_suit, label_suiter
 from skimage.measure import find_contours
 import matplotlib.pyplot as plt
 
 
+# The soft_select dict allows to find the output of interest in each "original" subfolder of each soft
+# and to select the corresponding dict of label.
 soft_select = {
     'cnn': [label_cnn, 'r'],
     'suit': [label_suit, 'iw'],
@@ -66,7 +68,7 @@ def save_mask(input_dir, soft, mask_flag=True, edge_flag=True):
 
 
 def edge_mask():
-    mri = '/home/dieudonnem/hpc/out/comparaison/suiter_cnn/dataset_sence/sub-1/mask/suiter/r04_sub-testanat_acq-0p8mm_rec-MEMPRAGEnomotion_T1w/L_CrusI.nii'
+    mri = '/home/dieudonnem/hpc/out/derivative/suiter_cnn/dataset_sence/sub-1/mask/suiter/r04_sub-testanat_acq-0p8mm_rec-MEMPRAGEnomotion_T1w/L_CrusI.nii'
     img = nib.load(mri)
     data = img.get_fdata()
     edge = generic_gradient_magnitude(data, sobel)
@@ -80,6 +82,8 @@ def edge_mask():
 
 edge_mask()
 
+
+# main
 # for soft in ['cnn', 'suiter', 'suit']:
 #     input_dir = os.path.join('/home/dieudonnem/hpc/out/', soft, 'dataset_sence/sub-1/original')
 #     save_mask(input_dir, soft, mask_flag=False)
