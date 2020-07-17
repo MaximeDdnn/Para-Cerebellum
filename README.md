@@ -2,14 +2,14 @@
 
 ## Introduction to the tested cerebellum segmentation softs
 ### suit
-main_pipeline_segmentation_suit show you an exemple to run the function pipeline_segmentation_suit.
-You need to run Matlab and spm before be able to run pipeline_segmentation_suit.
 ### suiter
 ### cnn
 ### ceres
 
 ## Run segmentation processes and stored results.
 ### suit
+main_pipeline_segmentation_suit show you an exemple to run the function pipeline_segmentation_suit.
+You need to run Matlab and spm before be able to run pipeline_segmentation_suit.
 ### suiter
 ### cnn
 ### ceres
