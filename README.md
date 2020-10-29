@@ -1,5 +1,10 @@
 # Para-Cerebellum
 
+
+<div align="center">
+  <img src=https://github.com/MaximeDdnn/e-cervelet/blob/main/e-cervelet_logo.png height="300" width="300">
+</div>
+
 ## Introduction to the tested cerebellum segmentation softs
 ### suit
 website : http://www.diedrichsenlab.org/imaging/suit.htm
