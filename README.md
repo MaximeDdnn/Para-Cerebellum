@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <img src=https://github.com/MaximeDdnn/Para-Cerebellum/blob/master/para_cerebellum_logo.png height="600" width="300">
+  <img src=https://github.com/MaximeDdnn/Para-Cerebellum/blob/master/para_cerebellum_logo.png height="300" width="600">
 </div>
 
 ## Introduction to the tested cerebellum segmentation softs
