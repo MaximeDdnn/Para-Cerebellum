@@ -5,6 +5,15 @@
   <img src=https://github.com/MaximeDdnn/Para-Cerebellum/blob/master/para_cerebellum_logo.png height="300" width="600">
 </div>
 
+
+## Introduction
+
+## ground truth 
+# Reference for lobule segmentation : schmaaman 2000
+# Method for non expert manually segment the cerebellum : Bogovic 2013
+
+## State of the Art
+
 ## Introduction to the tested cerebellum segmentation softs
 ### suit
 website : http://www.diedrichsenlab.org/imaging/suit.htm
