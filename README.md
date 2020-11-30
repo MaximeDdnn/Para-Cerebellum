@@ -5,14 +5,30 @@
   <img src=https://github.com/MaximeDdnn/Para-Cerebellum/blob/master/para_cerebellum_logo.png height="300" width="600">
 </div>
 
+# description of the scripts
 
-## Introduction
+For installation/run of Maget and CNN : 
+/MAGET/maget_install.sh : this script details the depencies you need to install it (minctooklkit2, pyminc, minc-stuff) \
 
-## ground truth 
-# Reference for lobule segmentation : schmaaman 2000
-# Method for non expert manually segment the cerebellum : Bogovic 2013
+/CNN/script_cnn.py : thi is the script for run the CNN program  available here : http://www.iacl.ece.jhu.edu/index.php/Cerebellum_CNN \
+INPUT : \ 
+simg_path :  specify the path where you installed cerebellum-parcellation_v2.simg \
+input_dir : specify where your inputs are stored. \
+output_folder : soecify the name of the folder where outputs are stored. The location of this folder is by default in the input_dir, you can't change that. \
+output_dir : specify where you want to move the output folder. \
+OUTPUT : outputs gerated by the simg in the output_folder. \
 
-## State of the Art
+/derivative/evaluation.py : this script detects the edges of the your segmented images. This is really uselful to put in evidence the different segmentations of the differents softwares.
+INPUT : list of segmented images
+OUTPUT : images with edges preprocessed
+
+# Introduction
+
+# ground truth 
+## Reference for lobule segmentation : schmaaman 2000
+## Method for non expert manually segment the cerebellum : Bogovic 2013
+
+# State of the Art
 
 ## Introduction to the tested cerebellum segmentation softs
 ### suit
