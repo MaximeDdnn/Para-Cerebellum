@@ -1,9 +1,15 @@
 # Para-Cerebellum
 
+THis is a set of Tools and functions that allow you to compare the different automatic segmentation of the different softwares.
+
+
 
 <div align="center">
   <img src=https://github.com/MaximeDdnn/Para-Cerebellum/blob/master/para_cerebellum_logo.png height="300" width="600">
 </div>
+
+# Python dependencies
+python 3.8 with conda environement https://www.anaconda.com/
 
 # description of the scripts
 
@@ -37,7 +43,7 @@ website : http://www.diedrichsenlab.org/imaging/suit.htm
 website : https://figshare.com/articles/S1_Data_Validation_brainstem_masks_and_Application_datasets_SUIT_and_SUITer_scripts_/7886243/1
 ### cnn
 website : http://iacl.ece.jhu.edu/index.php?title=Cerebellum_CNN
-### ceres
+### cers
 webiste : https://www.volbrain.upv.es/instructions.php
 
 ## Run segmentation processes and stored results.
